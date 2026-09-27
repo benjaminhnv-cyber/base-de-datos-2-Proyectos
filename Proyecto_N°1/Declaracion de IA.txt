@@ -1,0 +1,12 @@
+Uso de Inteligencia Artificial
+La Inteligencia Artificial fue utilizada como herramienta de apoyo durante el desarrollo.
+
+Parte 1:
+En la primera parte se utilizó Inteligencia Artificial como apoyo para resolver dudas conceptuales, depurar errores del código y generar datos aleatorios para realizar pruebas del programa.
+
+Parte 2:
+En la segunda parte se utilizó Inteligencia Artificial como apoyo para depurar errores, revisar el código y generar datos para realizar pruebas y verificar su funcionamiento.
+
+
+
+
