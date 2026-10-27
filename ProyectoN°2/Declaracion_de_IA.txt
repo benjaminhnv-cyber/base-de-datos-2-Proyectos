@@ -1,0 +1,11 @@
+Declaración de Uso de Inteligencia Artificial
+Hago constar que durante el desarrollo de este proyecto se utilizó la herramienta de Inteligencia Artificial (ChatGPT y Gemini) como apoyo.
+
+Usos específicos de la herramienta:
+1. Resolución de dudas conceptuales: Comprensión del uso de session.flush() en SQLAlchemy para manejar transacciones atómicas y recuperacion de claves primarias autoincrementales sin cerrar la transacción.
+2. Depuración y corrección de errores: Diagnóstico de excepciones como UnboundLocalError, errores sintácticos en consultas select().where(), y ajustes en esquemas de Pydantic con Field, tambien en la revision de las Tablas Modelos.py.
+3. Estructuración del proyecto: Guía en la modularización de la aplicación FastAPI utilizando `APIRouter'.
+4. En la generacion del seed.py
+
+Adaptación y comprensión:
+Todo el código sugerido por la IA fue revisado, adaptado e integrado manualmente para cumplir con el modelo relacional propuesto y los requisitos específicos de las reglas de negocio solicitadas en la pauta de la asignatura.
