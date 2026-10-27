@@ -18,8 +18,8 @@ def cargar_datos_iniciales():
         session.flush()
 
         prod1 = Product(name="Empanadas de Pino", description="2 unidades tradicionales", price=Decimal("3500.00"), stock=20, availability=True, category_id=cat_entradas.id)
-        prod2 = Product(name="Lomo a lo Pobre", description="Lomo con papas fritas y huevo", price=Decimal("12500.00"), stock=15, availability=True, category_id=cat_fondos.id)
-        prod3 = Product(name="Jugo Natural de Frambuesa", description="Vaso 500ml", price=Decimal("2800.00"), stock=30, availability=True, category_id=cat_bebidas.id)
+        prod2 = Product(name="Lomo a lo Pobre", description="Lomo con papas fritas y huevo", price=Decimal("12500.00"), stock=3, availability=True, category_id=cat_fondos.id)
+        prod3 = Product(name="Jugo Natural de Frambuesa", description="Vaso 500ml", price=Decimal("2800.00"), stock=1, availability=True, category_id=cat_bebidas.id)
 
         session.add_all([prod1, prod2, prod3])
 

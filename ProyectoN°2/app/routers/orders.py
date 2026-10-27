@@ -37,9 +37,7 @@ def crear_orden(ord: Order_create):
             raise HTTPException(status_code=400, detail=f"La mesa número {table.number} ya está ocupada.")
 
         # Validación explícita de pedido abierto existente
-        pedido_abierto = session.execute(
-            select(Order).where(Order.table_id == ord.table_id, Order.status == "abierto")
-        ).scalar_one_or_none()
+        pedido_abierto = session.execute(select(Order).where(Order.table_id == ord.table_id, Order.status == "abierto")).scalar_one_or_none()
         
         if pedido_abierto:
             raise HTTPException(status_code=400, detail="La mesa ya tiene un pedido abierto registrado.")
