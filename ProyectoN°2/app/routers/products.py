@@ -7,21 +7,24 @@ from Modelos import Product
 from schemas import Product_activate, Product_create, ProductUpdate
 
 router = APIRouter(prefix="/products", tags=["Productos"])
-@router.get("", status_code= 200) #lista de productos
-def listar_product(category_id: Optional[int] = Query(None, description="Filtrar por id de categorya"), available: bool = Query(False, description="Si esta true, retorna solo producto disponibles") ): # optional , query escribir lo que hace el optional y query
+
+
+@router.get("", status_code=200)
+def listar_product(category_id: Optional[int] = Query(None, description="Filtrar por id de categoría"),available: Optional[bool] = Query(None, description="Filtrar por disponibilidad (True/False)"),):
     with Session() as session:
         query = select(Product)
 
         if available is not None:
-            query = query.where(Product.availability == True)
+            query = query.where(Product.availability == available)
 
         if category_id is not None:
             query = query.where(Product.category_id == category_id)
 
         product = session.execute(query).scalars().all()
-        return  product
+        return product
 
-@router.get("/{id}", status_code=200) #busqueda por id del producto
+
+@router.get("/{id}", status_code=200)
 def busqueda_id_product(id: int):
     with Session() as session:
         product = session.get(Product, id)
@@ -29,20 +32,22 @@ def busqueda_id_product(id: int):
             raise HTTPException(status_code=404, detail="Producto no encontrado")
         return product
 
-@router.post("",status_code= 201) #crear producto
+
+@router.post("", status_code=201)
 def insert_product(producto: Product_create):
     with Session() as session:
-        NewProduct = Product(**producto.model_dump()) # seguramente hacer que no se repitan los productos preguntar a la profe
+        NewProduct = Product(**producto.model_dump())
         session.add(NewProduct)
         session.commit()
         session.refresh(NewProduct)
         return NewProduct
 
+
 @router.put("/{id}", status_code=200)
 def actualizarProducto(id: int, datos: ProductUpdate):
     with Session() as session:
         producto = session.get(Product, id)
-        if not producto: 
+        if not producto:
             raise HTTPException(status_code=404, detail="Producto no encontrado")
 
         dict_act = datos.model_dump(exclude_unset=True)
@@ -53,16 +58,22 @@ def actualizarProducto(id: int, datos: ProductUpdate):
         session.refresh(producto)
         return producto
 
-@router.post("/{product_id}/activate",status_code = 200)
+
+@router.post("/{product_id}/activate", status_code=200)
 def activate_false(product_id: int, act: Product_activate):
     with Session() as session:
         product = session.get(Product, product_id)
         if not product:
             raise HTTPException(status_code=404, detail="Producto no encontrado")
         if act.availability and product.stock <= 0:
-            raise HTTPException(status_code=400, detail="No se puedo activar el producto porque no tiene stock")
+            raise HTTPException(status_code=400, detail="No se puede activar el producto porque no tiene stock")
 
         product.availability = act.availability
         session.commit()
         session.refresh(product)
-        return{"mensaje": "Estado actualizado", "ID Producto": product.id, "Estado": product.availability, "Stock": product.stock}
+        return {
+            "mensaje": "Estado actualizado",
+            "ID Producto": product.id,
+            "Estado": product.availability,
+            "Stock": product.stock,
+        }

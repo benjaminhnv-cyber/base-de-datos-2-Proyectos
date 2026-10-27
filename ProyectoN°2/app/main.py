@@ -9,8 +9,10 @@ app = FastAPI(
 )
 
 # Inclusión de Routers / tienes que modificar los archivos ya hice orders
-app.get("/")
-app.include_router(categories.router)
+@app.get("/")
+def root():
+    return {"mensaje": "API Restaurante Activa"}
+
 app.include_router(products.router)
 app.include_router(tables.router)
 app.include_router(orders.router)
